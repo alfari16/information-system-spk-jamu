@@ -36,14 +36,10 @@ a:hover{
 }
 nav{
   background-color: white;
-  position: fixed;
   width: 100%;
   top: 0;
   transition: .3s cubic-bezier(0.075, 0.82, 0.165, 1);
   z-index: 999;
-}
-
-nav:not(.static){
   box-shadow: 0 2px 4px rgba(0,0,0,0.1)
 }
 nav.static{
@@ -59,7 +55,8 @@ nav .flex-wrap{
   font-weight: 700;
   font-family: 'Saira Condensed', sans-serif;
   letter-spacing: 2px;
-  font-size: 30px
+  font-size: 30px;
+  margin-bottom: 0
 }
 .blog-title span{
   color:rgb(159, 176, 233)
@@ -243,6 +240,7 @@ nav .flex-wrap{
 ul.link{
   display: flex;
   padding: 0;
+  margin: 0;
   justify-content: flex-end;
   width: 100%;
   flex: 1
@@ -374,7 +372,7 @@ footer .icon{
   font-size: 15px;
   margin-bottom: 5px
 }
-.form-control{
+input.form-control, textarea.form-control{
   flex: 1;
   padding: 5px 10px;
   border: 1px solid var(--accentColor);
@@ -450,9 +448,6 @@ footer .icon{
 .login .form-control{
   margin-bottom: 10px;
   height: 50px;
-}
-nav + *{
-  margin-top: 80px
 }
 @media (max-width:992px){
   .container{
@@ -763,4 +758,7 @@ nav + *{
   font-size: 26px;
   text-transform: capitalize;
   margin-top: 10px
+}
+.home-title{
+  font-weight: 700
 }
