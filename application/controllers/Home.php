@@ -8,24 +8,13 @@ class Home extends CI_Controller {
 		$this->load->model("HomeModel");
 		
 	}
-	// public function index(){
-	// 	$kriteria = $this->input->get();
-
-	// 	$data['allKriteria'] = $allKriteria = $this->HomeModel->kriteriaValue();
-	// 	$data['kriteriaSize'] = round(12/count($allKriteria));
-
-	// 	$json['encode'] = json_encode($this->AlternatifModel->index());
-	// 	$json['subKriteria'] = json_encode($this->HomeModel->subKriteria());
-
-	// 	$this->load->view('partials/header');
-	// 	$this->load->view("Home", $data);
-	// 	$this->load->view("Result", $json);
-	// 	$this->load->view('partials/footer');
-	// }
 
 	public function index(){
 		$data['allValue'] = $allKriteria = $this->HomeModel->index();
 		$data['allKriteria'] = $this->HomeModel->getKriteria();
+		$data['allKriteriaJson'] = json_encode($this->HomeModel->getKriteria());
+		$data['allSkala'] = $this->HomeModel->getSkala();
+
 
 		// $json['encode'] = json_encode($this->AlternatifModel->index());
 		// $json['subKriteria'] = json_encode($this->HomeModel->subKriteria());
@@ -34,5 +23,10 @@ class Home extends CI_Controller {
 		$this->load->view("Home", $data);
 		// $this->load->view("Result", $json);
 		$this->load->view('partials/footer');
+	}
+
+	public function edit() {
+		$this->HomeModel->update($this->input->post());
+		redirect(base_url());
 	}
 }

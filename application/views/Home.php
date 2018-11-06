@@ -16,10 +16,19 @@
     <tbody class="table-body">
       <?php foreach ($allValue as $value) { ?>
           <tr>
-            <th class="alternatif"><?= $value['alternatif'] ?></th>
+            <th data-id="<?= $value['alternatifId'] ?>" class="alternatif"><?= $value['alternatif'] ?></th>
             <?php foreach ($allKriteria as $kriteria) { ?>
-              <td class="text-center" scope="col">
-                <?= isset($value['kriteria'][$kriteria['nm_kriteria']])?$value['kriteria'][$kriteria['nm_kriteria']]:null ?>
+              <td class="text-center" scope="col" data-id="<?= $kriteria['id_kriteria'] ?>">
+                <form action="<?= base_url('Home/edit') ?>" method="POST">
+                  <select class="select form-control" name="id_skala">
+                    <?php foreach ($allSkala as $skala) { ?>
+                      <option value="<?= $skala['id_skala'] ?>" <?= $value['kriteria'][$kriteria['nm_kriteria']] === $skala['nm_skala'] ? 'selected' : '' ?>><?= $skala['nm_skala'] ?></option>
+                    <?php } ?>
+                  </select>
+                  <input type="hidden" name="id_kriteria" value="<?= $kriteria['id_kriteria'] ?>">
+                  <input type="hidden" name="id_alternatif" value="<?= $value['alternatifId'] ?>">
+                  <input type="submit" class="hidden btn-submit">
+                </form>
               </td>
             <?php } ?>
           </tr>
@@ -29,9 +38,12 @@
 </div>
 
 <script>
-  $('[style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;"]').hide();
-  $('.alternatif').each(function(idx, el){
-    var text = $(el).text().trim();
-    if(!text) $(el).closest('tr').hide();
-  });
+  var kriteria = <?= $allKriteriaJson ?>.map(el => el.id_kriteria);
+  console.log(kriteria);
+  $('.select').change(function(e) {
+    var kriteria = $(this).closest('td').attr('data-id');
+    var alternatif = $(this).closest('tr').find('th').attr('data-id');
+    console.log(alternatif, kriteria);
+    $(this).siblings('.btn-submit').click()
+  })
 </script>

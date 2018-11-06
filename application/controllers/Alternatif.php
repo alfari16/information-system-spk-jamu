@@ -4,6 +4,7 @@ class Alternatif extends CI_Controller{
   function __construct(){
     parent::__construct();
     $this->load->model("AlternatifModel");
+    $this->load->model("HomeModel");
   }
 
   public function index(){
@@ -17,7 +18,7 @@ class Alternatif extends CI_Controller{
 
   public function delete($id){
     $this->AlternatifModel->delete($id);
-    redirect("alternatif");
+    redirect(base_url("alternatif"));
   }
 
   public function insert(){
@@ -25,7 +26,8 @@ class Alternatif extends CI_Controller{
       'nm_alternatif' => $this->input->post('nm_alternatif'),
       'keterangan' => $this->input->post('keterangan'),
     );
-    $this->AlternatifModel->insert($array);
-    redirect('alternatif');
+    $id = $this->AlternatifModel->insert($array)['id_alt'];
+    $this->HomeModel->generateKriteriaValue($id);
+    redirect(base_url('alternatif'));
   }
 }

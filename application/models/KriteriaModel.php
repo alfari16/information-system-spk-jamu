@@ -52,6 +52,7 @@ class KriteriaModel extends CI_Model{
       'id_kriteria' => $res['id_kriteria'],
       'id_skala' => $post['skala']
     ]);
+    return $res['id_kriteria'];
   }
 
   public function insertBobot($arr) {
@@ -59,6 +60,8 @@ class KriteriaModel extends CI_Model{
   }
 
   function delete($id){
+    $this->db->where('id_kriteria', $id);
+    $this->db->delete('tbl_nilai');
     $this->db->where('id_kriteria', $id);
     $this->db->delete('tbl_bobot');
     $this->db->where('id_kriteria', $id);

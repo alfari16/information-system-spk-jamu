@@ -4,6 +4,7 @@ class Kriteria extends CI_Controller {
   public function __construct(){
     parent::__construct();
     $this->load->model('KriteriaModel');
+    $this->load->model('HomeModel');
   }
 
   public function index() {
@@ -23,7 +24,8 @@ class Kriteria extends CI_Controller {
       'nm_kriteria' => $this->input->post('nm_kriteria'),
       'keterangan' => $this->input->post('keterangan')
     ];
-    $this->KriteriaModel->insert($temp, $this->input->post());
+    $id = $this->KriteriaModel->insert($temp, $this->input->post());
+    $this->HomeModel->generateAlternatifValue($id);
     redirect(base_url('kriteria'));
   }
 
