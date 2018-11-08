@@ -5,6 +5,7 @@ class Alternatif extends CI_Controller{
     parent::__construct();
     $this->load->model("AlternatifModel");
     $this->load->model("HomeModel");
+    $this->load->model("KriteriaModel");
   }
 
   public function index(){
@@ -27,7 +28,7 @@ class Alternatif extends CI_Controller{
       'keterangan' => $this->input->post('keterangan'),
     );
     $id = $this->AlternatifModel->insert($array)['id_alt'];
-    $this->HomeModel->generateKriteriaValue($id);
+    $this->KriteriaModel->generateKriteriaValue($id);
     redirect(base_url('alternatif'));
   }
 }

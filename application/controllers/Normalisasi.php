@@ -4,13 +4,14 @@ class Normalisasi extends CI_Controller{
   function __construct(){
     parent::__construct();
     $this->load->model("AlternatifModel");
-    $this->load->model("HomeModel");
+    $this->load->model("NormalisasiModel");
+    $this->load->model("KriteriaModel");
   }
 
   public function index(){
-    $data['allValue'] = $this->HomeModel->normalisasiIndex();
-		$data['allKriteria'] = $this->HomeModel->getKriteria();
-		$data['allKriteriaJson'] = json_encode($this->HomeModel->getKriteria());
+    $data['allValue'] = $this->NormalisasiModel->index();
+		$data['allKriteria'] = $this->KriteriaModel->getKriteria();
+		$data['allKriteriaJson'] = json_encode($this->KriteriaModel->getKriteria());
 
 		$this->load->view('partials/header');
 		$this->load->view("Normalisasi", $data);
@@ -28,7 +29,7 @@ class Normalisasi extends CI_Controller{
       'keterangan' => $this->input->post('keterangan'),
     );
     $id = $this->AlternatifModel->insert($array)['id_alt'];
-    $this->HomeModel->generateKriteriaValue($id);
+    $this->KriteriaModel->generateKriteriaValue($id);
     redirect(base_url('alternatif'));
   }
 }

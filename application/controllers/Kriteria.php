@@ -4,16 +4,12 @@ class Kriteria extends CI_Controller {
   public function __construct(){
     parent::__construct();
     $this->load->model('KriteriaModel');
+    $this->load->model('AlternatifModel');
     $this->load->model('HomeModel');
   }
 
   public function index() {
     $data['items'] = $this->KriteriaModel->index();
-    // $data['bobot'] = $this->KriteriaModel->getSkala();
-
-    // var_dump($temp['Rasa']['nilai'][0]['nilai_kriteria']);
-    // var_dump($temp['Rasa']['bobot']);
-
     $this->load->view("partials/header");
     $this->load->view("Kriteria", $data);
     $this->load->view("partials/footer");
@@ -21,7 +17,7 @@ class Kriteria extends CI_Controller {
 
   public function insert(){
     $id = $this->KriteriaModel->insert($this->input->post());
-    $this->HomeModel->generateAlternatifValue($id);
+    $this->AlternatifModel->generateAlternatifValue($id);
     redirect(base_url('kriteria'));
   }
 

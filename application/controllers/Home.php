@@ -6,14 +6,15 @@ class Home extends CI_Controller {
 		parent::__construct();
 		$this->load->model("AlternatifModel");
 		$this->load->model("HomeModel");
-		
+		$this->load->model("KriteriaModel");
+		$this->load->model("SkalaModel");
 	}
 
 	public function index(){
 		$data['allValue'] = $allKriteria = $this->HomeModel->index();
-		$data['allKriteria'] = $this->HomeModel->getKriteria();
-		$data['allKriteriaJson'] = json_encode($this->HomeModel->getKriteria());
-		$data['allSkala'] = $this->HomeModel->getSkala();
+		$data['allKriteria'] = $this->KriteriaModel->getKriteria();
+		$data['allKriteriaJson'] = json_encode($this->KriteriaModel->getKriteria());
+		$data['allSkala'] = $this->SkalaModel->getSkala();
 
 
 		// $json['encode'] = json_encode($this->AlternatifModel->index());
