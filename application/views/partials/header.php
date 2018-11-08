@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>SPK Jamu</title>
-  <meta name="description" content="UIN Gallery adalah tempat terkumpulnya kreasi terbaik karya mahasiswa UIN Maliki">
+  <meta name="description" content="SI - SPK Jamu">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/bootstrap.min.css" />
@@ -22,13 +22,16 @@
         <div class="link-wrapper">
           <ul class="link">
             <li id="home">
-              <a href="<?php echo base_url()?>">Beranda</a>
+              <a href="<?php echo base_url()?>">Matrix</a>
+            </li>
+            <li id="normalisasi">
+              <a href="<?php echo base_url('normalisasi')?>">Normalisasi</a>
             </li>
             <li id="alternatif">
-              <a href="<?php echo base_url()?>alternatif">Alternatif</a>
+              <a href="<?php echo base_url('alternatif')?>">Alternatif</a>
             </li>
             <li id="kriteria">
-              <a href="<?php echo base_url()?>kriteria">Kriteria</a>
+              <a href="<?php echo base_url('kriteria')?>">Kriteria</a>
             </li>
           </ul>
         </div>

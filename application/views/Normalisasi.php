@@ -1,5 +1,5 @@
 <div class="container">
-  <p class="home-title" >Matriks Nilai</p>
+  <p class="home-title" >Normalisasi</p>
 
   <table class="table mt-5">
     <thead>
@@ -19,16 +19,7 @@
             <th data-id="<?= $value['alternatifId'] ?>" class="alternatif"><?= $value['alternatif'] ?></th>
             <?php foreach ($allKriteria as $kriteria) { ?>
               <td class="text-center" scope="col" data-id="<?= $kriteria['id_kriteria'] ?>">
-                <form action="<?= base_url('Home/edit') ?>" method="POST">
-                  <select class="select form-control" name="id_skala">
-                    <?php foreach ($allSkala as $skala) { ?>
-                      <option value="<?= $skala['id_skala'] ?>" <?= $value['kriteria'][$kriteria['nm_kriteria']] === $skala['nm_skala'] ? 'selected' : '' ?>><?= $skala['nm_skala'] ?></option>
-                    <?php } ?>
-                  </select>
-                  <input type="hidden" name="id_kriteria" value="<?= $kriteria['id_kriteria'] ?>">
-                  <input type="hidden" name="id_alternatif" value="<?= $value['alternatifId'] ?>">
-                  <input type="submit" class="hidden btn-submit">
-                </form>
+                <?= $value['kriteria'][$kriteria['nm_kriteria']] ?>
               </td>
             <?php } ?>
           </tr>

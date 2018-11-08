@@ -9,7 +9,7 @@ class Kriteria extends CI_Controller {
 
   public function index() {
     $data['items'] = $this->KriteriaModel->index();
-    $data['bobot'] = $this->KriteriaModel->getSkala();
+    // $data['bobot'] = $this->KriteriaModel->getSkala();
 
     // var_dump($temp['Rasa']['nilai'][0]['nilai_kriteria']);
     // var_dump($temp['Rasa']['bobot']);
@@ -20,11 +20,7 @@ class Kriteria extends CI_Controller {
   }
 
   public function insert(){
-    $temp = [
-      'nm_kriteria' => $this->input->post('nm_kriteria'),
-      'keterangan' => $this->input->post('keterangan')
-    ];
-    $id = $this->KriteriaModel->insert($temp, $this->input->post());
+    $id = $this->KriteriaModel->insert($this->input->post());
     $this->HomeModel->generateAlternatifValue($id);
     redirect(base_url('kriteria'));
   }

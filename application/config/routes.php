@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$route['normalisasi'] = 'Normalisasi';
 $route['alternatif'] = 'Alternatif';
 $route['kriteria'] = 'Kriteria';
 $route['default_controller'] = 'Home';

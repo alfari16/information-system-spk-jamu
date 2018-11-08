@@ -12,11 +12,7 @@
       </div>
       <div class="col-md-3">
         <label >Bobot: </label>  
-        <select name="skala" class="form-control">
-          <?php foreach ($bobot as $item) {  ?>
-            <option value="<?= $item['id_skala'] ?>"><?= $item['nm_skala'] ?></option>
-          <?php } ?>
-        </select>
+        <input type="number" class="form-control" name="bobot">
       </div>
       <div class="col-md-3 row" style="align-items:flex-end;padding-left:30px">
         <button style="height:35px;align-items:center;justify-content:center;padding:0" class="row btn btn-primary form-control" type="submit">Tambah</button>
@@ -40,7 +36,7 @@
           <th class="text-center" scope="row" class="id"><?= $value['id_kriteria'] ?></th>
           <td class="text-capitalized"><?= $value['nm_kriteria'] ?></td>
           <td class="text-capitalized"><?= $value['keterangan'] ?></td>
-          <td><?= $value['bobot'] ?></td>
+          <td><?= $value['bobot'] ?>%</td>
           <td class="text-center" style="cursor:pointer" class="delete"><i class="fa fa-trash fa-2x"></i></td>
         </tr>
       <?php 
