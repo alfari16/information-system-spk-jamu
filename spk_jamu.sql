@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 26, 2018 at 08:18 AM
+-- Generation Time: Nov 08, 2018 at 05:07 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -47,20 +47,20 @@ INSERT INTO `tbl_alternatif` (`id_alt`, `nm_alternatif`, `keterangan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_bobot`
+-- Table structure for table `tbl_bobot_DEPRECATED`
 --
 
-CREATE TABLE `tbl_bobot` (
+CREATE TABLE `tbl_bobot_DEPRECATED` (
   `id_bobot` int(11) NOT NULL,
   `id_kriteria` int(11) NOT NULL,
   `id_skala` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_bobot`
+-- Dumping data for table `tbl_bobot_DEPRECATED`
 --
 
-INSERT INTO `tbl_bobot` (`id_bobot`, `id_kriteria`, `id_skala`) VALUES
+INSERT INTO `tbl_bobot_DEPRECATED` (`id_bobot`, `id_kriteria`, `id_skala`) VALUES
 (1, 1, 3),
 (2, 2, 1),
 (3, 3, 2);
@@ -74,17 +74,18 @@ INSERT INTO `tbl_bobot` (`id_bobot`, `id_kriteria`, `id_skala`) VALUES
 CREATE TABLE `tbl_kriteria` (
   `id_kriteria` int(11) NOT NULL,
   `nm_kriteria` varchar(100) NOT NULL,
-  `keterangan` text NOT NULL
+  `keterangan` text NOT NULL,
+  `bobot` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_kriteria`
 --
 
-INSERT INTO `tbl_kriteria` (`id_kriteria`, `nm_kriteria`, `keterangan`) VALUES
-(1, 'Rasa', 'Rasa jamu'),
-(2, 'Khasiat', 'Khasiat Jamu'),
-(3, 'Harga', 'Harga Jamu');
+INSERT INTO `tbl_kriteria` (`id_kriteria`, `nm_kriteria`, `keterangan`, `bobot`) VALUES
+(1, 'Rasa', 'Rasa jamu', 30),
+(2, 'Khasiat', 'Khasiat Jamu', 40),
+(3, 'Harga', 'Harga Jamu', 30);
 
 -- --------------------------------------------------------
 
@@ -105,7 +106,7 @@ CREATE TABLE `tbl_nilai` (
 
 INSERT INTO `tbl_nilai` (`id_nilai`, `id_alternatif`, `id_kriteria`, `id_skala`) VALUES
 (1, 1, 3, 2),
-(2, 1, 2, 2),
+(2, 1, 2, 3),
 (3, 1, 1, 1),
 (4, 3, 3, 2),
 (5, 3, 2, 2),
@@ -126,7 +127,7 @@ INSERT INTO `tbl_nilai` (`id_nilai`, `id_alternatif`, `id_kriteria`, `id_skala`)
 CREATE TABLE `tbl_skala` (
   `id_skala` int(11) NOT NULL,
   `nm_skala` varchar(20) NOT NULL,
-  `value` varchar(5) NOT NULL
+  `value` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -134,9 +135,9 @@ CREATE TABLE `tbl_skala` (
 --
 
 INSERT INTO `tbl_skala` (`id_skala`, `nm_skala`, `value`) VALUES
-(1, 'Baik', 'B'),
-(2, 'Sedang', 'S'),
-(3, 'Buruk', 'B');
+(1, 'Baik', 90),
+(2, 'Sedang', 70),
+(3, 'Buruk', 50);
 
 --
 -- Indexes for dumped tables
@@ -149,9 +150,9 @@ ALTER TABLE `tbl_alternatif`
   ADD PRIMARY KEY (`id_alt`);
 
 --
--- Indexes for table `tbl_bobot`
+-- Indexes for table `tbl_bobot_DEPRECATED`
 --
-ALTER TABLE `tbl_bobot`
+ALTER TABLE `tbl_bobot_DEPRECATED`
   ADD PRIMARY KEY (`id_bobot`),
   ADD KEY `id_kriteria` (`id_kriteria`),
   ADD KEY `id_skala` (`id_skala`);
@@ -185,25 +186,25 @@ ALTER TABLE `tbl_skala`
 -- AUTO_INCREMENT for table `tbl_alternatif`
 --
 ALTER TABLE `tbl_alternatif`
-  MODIFY `id_alt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_alt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `tbl_bobot`
+-- AUTO_INCREMENT for table `tbl_bobot_DEPRECATED`
 --
-ALTER TABLE `tbl_bobot`
+ALTER TABLE `tbl_bobot_DEPRECATED`
   MODIFY `id_bobot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_kriteria`
 --
 ALTER TABLE `tbl_kriteria`
-  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_nilai`
 --
 ALTER TABLE `tbl_nilai`
-  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbl_skala`
@@ -216,11 +217,11 @@ ALTER TABLE `tbl_skala`
 --
 
 --
--- Constraints for table `tbl_bobot`
+-- Constraints for table `tbl_bobot_DEPRECATED`
 --
-ALTER TABLE `tbl_bobot`
-  ADD CONSTRAINT `tbl_bobot_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `tbl_kriteria` (`id_kriteria`),
-  ADD CONSTRAINT `tbl_bobot_ibfk_2` FOREIGN KEY (`id_skala`) REFERENCES `tbl_skala` (`id_skala`);
+ALTER TABLE `tbl_bobot_DEPRECATED`
+  ADD CONSTRAINT `tbl_bobot_DEPRECATED_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `tbl_kriteria` (`id_kriteria`),
+  ADD CONSTRAINT `tbl_bobot_DEPRECATED_ibfk_2` FOREIGN KEY (`id_skala`) REFERENCES `tbl_skala` (`id_skala`);
 
 --
 -- Constraints for table `tbl_nilai`

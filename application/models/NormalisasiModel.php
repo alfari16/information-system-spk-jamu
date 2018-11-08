@@ -15,7 +15,14 @@ class NormalisasiModel extends CI_Model{
       $data['alternatif'] = $res[0]['nm_alternatif'];
       $data['alternatifId'] = $value['id_alt'];
       foreach ($res as $value2) {
-        $sqlMax = "SELECT tbl_kriteria.nm_kriteria, MAX(tbl_skala.value) AS max FROM tbl_nilai, tbl_skala, tbl_kriteria, tbl_alternatif WHERE tbl_nilai.id_alternatif=tbl_alternatif.id_alt AND tbl_nilai.id_kriteria=tbl_kriteria.id_kriteria AND tbl_nilai.id_skala=tbl_skala.id_skala AND tbl_kriteria.nm_kriteria='".$value2['nm_kriteria']."' GROUP BY tbl_kriteria.nm_kriteria";
+        $sqlMax = "SELECT tbl_kriteria.nm_kriteria, MAX(tbl_skala.value) AS max 
+                FROM tbl_nilai, tbl_skala, tbl_kriteria, tbl_alternatif 
+                WHERE 
+                tbl_nilai.id_alternatif=tbl_alternatif.id_alt AND 
+                tbl_nilai.id_kriteria=tbl_kriteria.id_kriteria AND 
+                tbl_nilai.id_skala=tbl_skala.id_skala AND 
+                tbl_kriteria.nm_kriteria='".$value2['nm_kriteria']."' 
+                GROUP BY tbl_kriteria.nm_kriteria";
         $max = $this->db->query($sqlMax)->row_array()['max'];
         $data['kriteria'][$value2['nm_kriteria']] = $value2['value']/$max;
       }
