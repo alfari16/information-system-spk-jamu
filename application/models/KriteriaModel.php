@@ -28,9 +28,14 @@ class KriteriaModel extends CI_Model{
     $this->db->delete('tbl_kriteria');
   }
 
-  public function getKriteria() {
-		$query = $this->db->query('SELECT id_kriteria, nm_kriteria, bobot FROM `tbl_kriteria`');
+  public function getKriteria($all = '*') {
+		$query = $this->db->query("SELECT $all FROM `tbl_kriteria`");
 		return $query->result_array();
+  }
+
+  public function getKriteriaWhere($all = '*', $where) {
+		$query = $this->db->query("SELECT $all FROM `tbl_kriteria` WHERE $where");
+		return $query->row_array();
   }
 
 	public function getKriteriaId() {

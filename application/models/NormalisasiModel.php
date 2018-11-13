@@ -4,6 +4,7 @@ class NormalisasiModel extends CI_Model{
   public function __construct(){
     parent::__construct();
     $this->load->model('AlternatifModel');
+    $this->load->model('KriteriaModel');
   }
 
   public function index() {
@@ -14,6 +15,7 @@ class NormalisasiModel extends CI_Model{
       $res = $query->result_array();
       $data['alternatif'] = $res[0]['nm_alternatif'];
       $data['alternatifId'] = $value['id_alt'];
+      $data['total'] = 0;
       foreach ($res as $value2) {
         $sqlMax = "SELECT tbl_kriteria.nm_kriteria, MAX(tbl_skala.value) AS max 
                 FROM tbl_nilai, tbl_skala, tbl_kriteria, tbl_alternatif 
@@ -24,10 +26,13 @@ class NormalisasiModel extends CI_Model{
                 tbl_kriteria.nm_kriteria='".$value2['nm_kriteria']."' 
                 GROUP BY tbl_kriteria.nm_kriteria";
         $max = $this->db->query($sqlMax)->row_array()['max'];
-        $data['kriteria'][$value2['nm_kriteria']] = $value2['value']/$max;
+        $temp = $data['kriteria'][$value2['nm_kriteria']] = number_format($value2['value']/$max, 2);
+        
+        $getBobot = $this->KriteriaModel->getKriteriaWhere('bobot', "nm_kriteria = '".$value2['nm_kriteria']."'")['bobot'];
+        $data['total'] += ($temp*$getBobot);
       }
       array_push($arr, $data);
     }
 		return $arr;
-	}
+  }
 }

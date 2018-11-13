@@ -11,6 +11,8 @@
             (Bobot: <?= $kriteria['bobot'] ?>%)
           </th>
         <?php } ?>
+        <th class="text-center" scope="col">Total * Bobot</th>
+        <th class="text-center" scope="col">Ranking</th>
       </tr>
     </thead>
     <tbody class="table-body">
@@ -22,19 +24,23 @@
                 <?= $value['kriteria'][$kriteria['nm_kriteria']] ?>
               </td>
             <?php } ?>
+            <td class="text-center" scope="col" data-id="<?= $kriteria['id_kriteria'] ?>">
+              <?= $value['total'] ?>
+            </td>
+            <td class="text-center rank-class" scope="col" data-id="<?= $value['alternatifId'] ?>">
+              
+            </td>
           </tr>
       <?php } ?>
     </tbody>
   </table>
 </div>
-
 <script>
-  var kriteria = <?= $allKriteriaJson ?>.map(el => el.id_kriteria);
-  console.log(kriteria);
-  $('.select').change(function(e) {
-    var kriteria = $(this).closest('td').attr('data-id');
-    var alternatif = $(this).closest('tr').find('th').attr('data-id');
-    console.log(alternatif, kriteria);
-    $(this).siblings('.btn-submit').click()
+  const arr = JSON.parse(`<?= $allValueJson; ?>`).sort((a,b) => b.total-a.total);
+  console.log(arr);
+  $('.rank-class').each(function(idx, val){
+    const id = $(this).attr('data-id');
+    let find = arr.findIndex(el => el.alternatifId === id )+1
+    $(this).text(find)
   })
 </script>

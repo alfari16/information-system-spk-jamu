@@ -10,8 +10,8 @@ class Normalisasi extends CI_Controller{
 
   public function index(){
     $data['allValue'] = $this->NormalisasiModel->index();
+    $data['allValueJson'] = json_encode($this->NormalisasiModel->index());
 		$data['allKriteria'] = $this->KriteriaModel->getKriteria();
-		$data['allKriteriaJson'] = json_encode($this->KriteriaModel->getKriteria());
 
 		$this->load->view('partials/header');
 		$this->load->view("Normalisasi", $data);
