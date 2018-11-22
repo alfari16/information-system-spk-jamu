@@ -1,5 +1,5 @@
 <div class="container">
-  <p class="home-title" >Normalisasi</p>
+  <p class="home-title" >SPK - Weighted Product</p>
 
   <table class="table mt-5">
     <thead>
@@ -11,7 +11,8 @@
             (Bobot: <?= $kriteria['bobot'] ?>%)
           </th>
         <?php } ?>
-        <th class="text-center" scope="col">Total * Bobot</th>
+        <th class="text-center" scope="col">Vektor S</th>
+        <th class="text-center" scope="col">Vektor V</th>
         <th class="text-center" scope="col">Ranking</th>
       </tr>
     </thead>
@@ -25,7 +26,10 @@
               </td>
             <?php } ?>
             <td class="text-center" scope="col" data-id="<?= $kriteria['id_kriteria'] ?>">
-              <?= $value['total'] ?>
+              <?= $value['vektorS'] ?>
+            </td>
+            <td class="text-center" scope="col" data-id="<?= $kriteria['id_kriteria'] ?>">
+              <?= $value['vektorV'] ?>
             </td>
             <td class="text-center rank-class" scope="col" data-id="<?= $value['alternatifId'] ?>">
               
@@ -36,17 +40,18 @@
   </table>
 </div>
 <script>
-  let before = null, rank = 1;
+  let rank = 1, before = null;
   const arr = JSON.parse(`<?= $allValueJson; ?>`)
-    .sort((a,b) => b.total-a.total)
+    .sort((a, b) => b.vektorV - a.vektorV)
     .map(el => {
-      if (before && el.total<before) rank++;
-      before = el.total;
+      if(before && el.vektorV < before) rank++;
+      before = el.vektorV;
       return {
         ...el,
-        rank
+        rank: rank
       }
-    });
+    })
+    ;
   console.log(arr);
   $('.rank-class').each(function(idx, val){
     const id = $(this).attr('data-id');

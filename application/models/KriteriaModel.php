@@ -38,13 +38,8 @@ class KriteriaModel extends CI_Model{
 		return $query->row_array();
   }
 
-	public function getKriteriaId() {
-		$query = $this->db->query('SELECT id_kriteria FROM `tbl_kriteria`');
-		return $query->result_array();
-  }
-
   public function generateKriteriaValue($id){
-    $kriterias = $this->getKriteriaId();
+    $kriterias = $this->getKriteria('id_kriteria');
     $skala = $this->SkalaModel->getSkalaId()['id_skala'];
     foreach ($kriterias as $kriteria) {
       $this->db->insert('tbl_nilai', [

@@ -24,6 +24,9 @@
             <li id="home">
               <a href="<?php echo base_url()?>">Matrix</a>
             </li>
+            <li id="spk">
+              <a href="<?php echo base_url('spk')?>">SPK - WP</a>
+            </li>
             <li id="normalisasi">
               <a href="<?php echo base_url('normalisasi')?>">Normalisasi</a>
             </li>
@@ -40,11 +43,13 @@
   </nav>
   <div class="v-spacer">
   <script>
-    var url = location.href;
+    var raw = location.href.split('/');
+    var url = raw[raw.length-1];
     var activated=false;
     $('.link').children('li').each(function(index,val){
-      var text = $(val).attr('id')?$(val).attr('id').toLowerCase():null;
-      if(url.indexOf(text)>0) {
+      var text = $(val).attr('id');
+      console.log(text, url);
+      if(url === text) {
         $(val).addClass('active');
         activated=true;
       };
