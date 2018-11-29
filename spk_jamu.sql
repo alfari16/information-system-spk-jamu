@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 08, 2018 at 05:07 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Nov 29, 2018 at 03:01 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -43,27 +43,6 @@ INSERT INTO `tbl_alternatif` (`id_alt`, `nm_alternatif`, `keterangan`) VALUES
 (2, 'Kunyit Asam', 'Jamu Kunyit Asam'),
 (3, 'Kunyit', 'Jamu Kunyit'),
 (4, 'Pahit', 'Jamu Pahit');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_bobot_DEPRECATED`
---
-
-CREATE TABLE `tbl_bobot_DEPRECATED` (
-  `id_bobot` int(11) NOT NULL,
-  `id_kriteria` int(11) NOT NULL,
-  `id_skala` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_bobot_DEPRECATED`
---
-
-INSERT INTO `tbl_bobot_DEPRECATED` (`id_bobot`, `id_kriteria`, `id_skala`) VALUES
-(1, 1, 3),
-(2, 2, 1),
-(3, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -110,7 +89,7 @@ INSERT INTO `tbl_nilai` (`id_nilai`, `id_alternatif`, `id_kriteria`, `id_skala`)
 (3, 1, 1, 1),
 (4, 3, 3, 2),
 (5, 3, 2, 2),
-(6, 3, 1, 2),
+(6, 3, 1, 3),
 (7, 2, 3, 2),
 (8, 2, 2, 2),
 (9, 2, 1, 2),
@@ -150,14 +129,6 @@ ALTER TABLE `tbl_alternatif`
   ADD PRIMARY KEY (`id_alt`);
 
 --
--- Indexes for table `tbl_bobot_DEPRECATED`
---
-ALTER TABLE `tbl_bobot_DEPRECATED`
-  ADD PRIMARY KEY (`id_bobot`),
-  ADD KEY `id_kriteria` (`id_kriteria`),
-  ADD KEY `id_skala` (`id_skala`);
-
---
 -- Indexes for table `tbl_kriteria`
 --
 ALTER TABLE `tbl_kriteria`
@@ -186,25 +157,19 @@ ALTER TABLE `tbl_skala`
 -- AUTO_INCREMENT for table `tbl_alternatif`
 --
 ALTER TABLE `tbl_alternatif`
-  MODIFY `id_alt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `tbl_bobot_DEPRECATED`
---
-ALTER TABLE `tbl_bobot_DEPRECATED`
-  MODIFY `id_bobot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_alt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_kriteria`
 --
 ALTER TABLE `tbl_kriteria`
-  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_nilai`
 --
 ALTER TABLE `tbl_nilai`
-  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_skala`
@@ -215,13 +180,6 @@ ALTER TABLE `tbl_skala`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `tbl_bobot_DEPRECATED`
---
-ALTER TABLE `tbl_bobot_DEPRECATED`
-  ADD CONSTRAINT `tbl_bobot_DEPRECATED_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `tbl_kriteria` (`id_kriteria`),
-  ADD CONSTRAINT `tbl_bobot_DEPRECATED_ibfk_2` FOREIGN KEY (`id_skala`) REFERENCES `tbl_skala` (`id_skala`);
 
 --
 -- Constraints for table `tbl_nilai`
