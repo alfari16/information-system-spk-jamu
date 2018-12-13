@@ -24,6 +24,9 @@
             <li id="home">
               <a href="<?php echo base_url()?>">Matrix</a>
             </li>
+            <li id="uji">
+              <a href="<?php echo base_url('uji')?>">Uji</a>
+            </li>
             <li id="spk">
               <a href="<?php echo base_url('spk')?>">SPK - WP</a>
             </li>

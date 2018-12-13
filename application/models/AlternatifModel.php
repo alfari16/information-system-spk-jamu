@@ -39,7 +39,7 @@ class AlternatifModel extends CI_Model{
 
   public function generateAlternatifValue($id){
     $alternatifs = $this->getAlternatifId();
-    $skala = $this->SkalaModel->getSkalaId()['id_skala'];
+    $skala = $this->SkalaModel->getSkala('*')['id_skala'];
     foreach ($alternatifs as $alternatif) {
       $this->db->insert('tbl_nilai', [
         'id_kriteria' => $id,

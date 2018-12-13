@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 29, 2018 at 03:01 PM
+-- Generation Time: Dec 13, 2018 at 06:39 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -118,6 +118,27 @@ INSERT INTO `tbl_skala` (`id_skala`, `nm_skala`, `value`) VALUES
 (2, 'Sedang', 70),
 (3, 'Buruk', 50);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_uji`
+--
+
+CREATE TABLE `tbl_uji` (
+  `id_uji` int(11) NOT NULL,
+  `id_kriteria` int(11) NOT NULL,
+  `id_skala` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_uji`
+--
+
+INSERT INTO `tbl_uji` (`id_uji`, `id_kriteria`, `id_skala`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 1);
+
 --
 -- Indexes for dumped tables
 --
@@ -150,6 +171,14 @@ ALTER TABLE `tbl_skala`
   ADD PRIMARY KEY (`id_skala`);
 
 --
+-- Indexes for table `tbl_uji`
+--
+ALTER TABLE `tbl_uji`
+  ADD PRIMARY KEY (`id_uji`),
+  ADD KEY `fk_skala` (`id_skala`),
+  ADD KEY `fk_kriteria` (`id_kriteria`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -178,6 +207,12 @@ ALTER TABLE `tbl_skala`
   MODIFY `id_skala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `tbl_uji`
+--
+ALTER TABLE `tbl_uji`
+  MODIFY `id_uji` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -188,6 +223,13 @@ ALTER TABLE `tbl_nilai`
   ADD CONSTRAINT `tbl_nilai_ibfk_1` FOREIGN KEY (`id_alternatif`) REFERENCES `tbl_alternatif` (`id_alt`),
   ADD CONSTRAINT `tbl_nilai_ibfk_2` FOREIGN KEY (`id_kriteria`) REFERENCES `tbl_kriteria` (`id_kriteria`),
   ADD CONSTRAINT `tbl_nilai_ibfk_3` FOREIGN KEY (`id_skala`) REFERENCES `tbl_skala` (`id_skala`);
+
+--
+-- Constraints for table `tbl_uji`
+--
+ALTER TABLE `tbl_uji`
+  ADD CONSTRAINT `fk_kriteria` FOREIGN KEY (`id_kriteria`) REFERENCES `tbl_kriteria` (`id_kriteria`),
+  ADD CONSTRAINT `fk_skala` FOREIGN KEY (`id_skala`) REFERENCES `tbl_skala` (`id_skala`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

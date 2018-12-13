@@ -40,7 +40,7 @@ class KriteriaModel extends CI_Model{
 
   public function generateKriteriaValue($id){
     $kriterias = $this->getKriteria('id_kriteria');
-    $skala = $this->SkalaModel->getSkalaId()['id_skala'];
+    $skala = $this->SkalaModel->getSkala('id')['id_skala'];
     foreach ($kriterias as $kriteria) {
       $this->db->insert('tbl_nilai', [
         'id_alternatif' => $id,
